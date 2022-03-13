@@ -15,13 +15,6 @@ string nospaces(string input) {
 }
 
 TEST_CASE("Good input") {
-	CHECK(nospaces(mat(9, 7, '@', '+')) == nospaces("@@@@@@@@@\n"
-													 "@+++++++@\n"
-													 "@+@@@@@+@\n"
-													 "@+@+++@+@\n"
-													 "@+@@@@@+@\n"
-													 "@+++++++@\n"
-													 "@@@@@@@@@"));
 
 
     CHECK(nospaces(mat(1, 1, '%', '-')) == nospaces("%"));
@@ -47,14 +40,8 @@ TEST_CASE("Good input") {
 
     CHECK(nospaces(mat(3, 3, '@', '@')).length() == 9);
     CHECK(nospaces(mat(5, 5, '*', '#')).length() == 25);
-    CHECK(nospaces(mat(9, 7, '@', '+')) == nospaces("@@@@@@@@@\n"
-													 "@-------@\n"
-													 "@-@@@@@-@\n"
-													 "@-@---@-@\n"
-													 "@-@@@@@-@\n"
-													 "@-------@\n"
-													 "@@@@@@@@@"));
-}
+    CHECK(nospaces(mat(1, 1, '%', '-')).leanth()==1);
+    CHECK(nospaces(mat(1, 1, '%', '+')).leanth()==1); 
 
 
 //"Bad input"
