@@ -23,13 +23,7 @@ TEST_CASE("Good input") {
 													 "@+++++++@\n"
 													 "@@@@@@@@@"));
 
-    CHECK(nonspaces(mat(9,7,'-','@'))) ==  nospaces("---------\n"
-													 "-+++++++-\n"
-													 "-+-----+-\n"
-													 "-+-+++-+-\n"
-													 "-+-----+-\n"
-													 "-+++++++-\n"
-													 "---------"));
+
     CHECK(nospaces(mat(1, 1, '%', '-')) == nospaces("%"));
     CHECK(nospaces(mat(1, 1, '!', '-')) == nospaces("!"));
 	CHECK(nospaces(mat(1, 5, '@', '+')) == nospaces("@\n"
@@ -43,16 +37,23 @@ TEST_CASE("Good input") {
 
     CHECK(nospaces(mat(5, 5, '@', '@')) == nospaces("@@@@@\n"
                                                     "@@@@@\n"
-                                                    "@@@@@\n"));
                                                     "@@@@@\n"
-													"@@@@@\n"
+                                                    "@@@@@\n"
+													"@@@@@\n"));
 
     CHECK(nospaces(mat(3, 3, '@', '*')) == nospaces("@@@\n"
                                                     "@*@\n"
                                                     "@@@"));
 
     CHECK(nospaces(mat(3, 3, '@', '@')).length() == 9);
-    CHECK(nospaces(mat(5, 5, '*', '#')).length() == 25)
+    CHECK(nospaces(mat(5, 5, '*', '#')).length() == 25);
+    CHECK(nospaces(mat(9, 7, '@', '+')) == nospaces("@@@@@@@@@\n"
+													 "@-------@\n"
+													 "@-@@@@@-@\n"
+													 "@-@---@-@\n"
+													 "@-@@@@@-@\n"
+													 "@-------@\n"
+													 "@@@@@@@@@"));
 }
 
 
