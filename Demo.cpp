@@ -1,61 +1,38 @@
 /**
- * An example of how to write unit tests.
- * Use this as a basis to build a more complete Test.cpp file.
+ * Demo program for mat exercise.
  * 
- * IMPORTANT: Please write more tests - the tests here are only for example and are not complete.
- *
- * AUTHORS: <Please write your names here>
- * 
- * Date: 2021-02
+ * Author: Tal Zichlinsky
+ * Since : 2022-01
  */
 
-#include "doctest.h"
 #include "mat.hpp"
-using namespace ariel;
 
-#include <string>
-#include <algorithm>
+#include <iostream>
+#include <stdexcept>
 using namespace std;
 
-/**
- * Returns the input string without the whitespace characters: space, newline and tab.
- * Requires std=c++2a.
- */
-string nospaces(string input) {
-	std::erase(input, ' ');
-	std::erase(input, '\t');
-	std::erase(input, '\n');
-	std::erase(input, '\r');
-	return input;
-}
-$$$
-$+$
-$+$
-$+$
-$$$
-
-TEST_CASE("Good input") {
-	CHECK(nospaces(mat(9, 7, '@', '-')) == nospaces("@@@@@@@@@\n"
-													 "@-------@\n"
-													 "@-@@@@@-@\n"
-													 "@-@---@-@\n"
-													 "@-@@@@@-@\n"
-													 "@-------@\n"
-													 "@@@@@@@@@"));
-	/* Add more test here */
-    CHECK(nonespace(mat(1,1,'@','+')) == nospaces("@@
-                                                   @@
-                                                   ")
-
-    CHECK(nonespace(mat(3,1,'@','+')) == nospaces("@@@\n
-                                                   @+@
-                                                   @@@\r"))
-    CHECK(namespace(mat(4,2,'$'))) == 
-    
-}
-
-TEST_CASE("Bad input") {
-    CHECK_THROWS(mat(10, 5, '$', '%'));
-    /* Add more test here */
-    CHECK_THROWS(nospaces(mat(9,10,'$', '%')))
+int main() {
+	cout << ariel::mat(9, 7, '@', '-') << endl;
+/* Should print:
+@@@@@@@@@
+@-------@
+@-@@@@@-@
+@-@---@-@
+@-@@@@@-@
+@-------@
+@@@@@@@@@
+*/
+	cout << ariel::mat(13, 5, '@', '-') << endl; 
+/* Should print:
+@@@@@@@@@@@@@
+@-----------@
+@-@@@@@@@@@-@
+@-----------@
+@@@@@@@@@@@@@
+*/
+	try {
+		cout << ariel::mat(10, 5, '$', '%') << endl; // Exception - not a valid code
+	} catch (exception& ex) {
+	 	cout << "   caught exception: " << ex.what() << endl;  // should print "Mat size is always odd"
+	}
 }
