@@ -52,7 +52,7 @@ TEST_CASE("Good input") {
                                                     "@@@"));
 
     CHECK(nospaces(mat(3, 3, '@', '@')).length() == 9);
-    CHECK(nospaces(mat(5, 5, '*', '#')).lenth() = 25)
+    CHECK(nospaces(mat(5, 5, '*', '#')).length() == 25)
 }
 
 
