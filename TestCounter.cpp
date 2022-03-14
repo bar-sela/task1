@@ -1,61 +1,30 @@
-/**
- * An example of how to write unit tests.
- * Use this as a basis to build a more complete Test.cpp file.
- * 
- * IMPORTANT: Please write more tests - the tests here are only for example and are not complete.
- *
- * AUTHORS: <Please write your names here>
- * 
- * Date: 2021-02
- */
-
+#define DOCTEST_CONFIG_IMPLEMENT
 #include "doctest.h"
-#include "mat.hpp"
-using namespace ariel;
+using namespace doctest;
 
-#include <string>
-#include <algorithm>
-using namespace std;
+const int MIN_TESTS = 20;
 
-/**
- * Returns the input string without the whitespace characters: space, newline and tab.
- * Requires std=c++2a.
- */
-string nospaces(string input) {
-	std::erase(input, ' ');
-	std::erase(input, '\t');
-	std::erase(input, '\n');
-	std::erase(input, '\r');
-	return input;
-}
-$$$
-$+$
-$+$
-$+$
-$$$
+int return_code = -1;
 
-TEST_CASE("Good input") {
-	CHECK(nospaces(mat(9, 7, '@', '-')) == nospaces("@@@@@@@@@\n"
-													 "@-------@\n"
-													 "@-@@@@@-@\n"
-													 "@-@---@-@\n"
-													 "@-@@@@@-@\n"
-													 "@-------@\n"
-													 "@@@@@@@@@"));
-	/* Add more test here */
-    CHECK(nonespace(mat(1,1,'@','+')) == nospaces("@@
-                                                   @@
-                                                   ")
+struct ReporterCounter: public ConsoleReporter {
+    ReporterCounter(const ContextOptions& input_options)
+            : ConsoleReporter(input_options) {}
 
-    CHECK(nonespace(mat(3,1,'@','+')) == nospaces("@@@\n
-                                                   @+@
-                                                   @@@\r"))
-    CHECK(namespace(mat(5,7,'$'))) == nospaces("@@@@@y") 
-    
-}
+    void test_run_end(const TestRunStats& run_stats) override {
+        if (run_stats.numAsserts >= MIN_TESTS) {
+            return_code = 0;
+        } else {
+            std::cout << "Please write at least " << MIN_TESTS << " tests! " <<  std::endl;
+            return_code = 1;
+        }
+    }
+};
 
-TEST_CASE("Bad input") {
-    CHECK_THROWS(mat(10, 5, '$', '%'));
-    /* Add more test here */
-    CHECK_THROWS(nospaces(mat(9,10,'$', '%')))
+REGISTER_REPORTER("counter", 1, ReporterCounter);
+
+int main(int argc, char** argv) {
+    Context context;
+    context.addFilter("reporters", "counter");
+    context.run();
+    return return_code;
 }
